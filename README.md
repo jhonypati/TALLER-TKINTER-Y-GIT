@@ -4,7 +4,7 @@ Estudiante: Jhony patiño alvira
 
 Informacion basica para ejecutar el programa:
 
-El programa necesita las siguientes librerias: tkinter,de este ttk 
+El programa necesita las siguientes librerias: tkinter,de este ttk,ttk.Combobox 
 
 Ejecutar los siguientes comandos para instalar las librerias:
 
