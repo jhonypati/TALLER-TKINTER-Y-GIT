@@ -1,1 +1,98 @@
-hola prrr
+import tkinter as tk
+from tkinter import ttk
+
+def init_window():
+    """
+    la funcion sirve para crear la pantalla inicial
+    paran string ():no tiene salida
+    :return: int
+    """
+    window = tk.Tk()  # crear la pantalla
+    window.title('mi primera aplicacion')#agregar titulo a la pantalla
+    window.geometry('400x250')
+
+
+    label=tk.Label(window,text='Calculadora',font=('Arial bold',15))#la letra y tamaño
+    label.grid(column=0,row=0)
+
+    #Agregar campos de texto
+    entrada1=tk.Entry(window,width=10)
+    entrada2 = tk.Entry(window, width=10)
+
+    entrada1.grid(column=1, row=1)
+    entrada2.grid(column=1, row=3)
+
+    #Agregar dos etiquetas para indicarle al usuario que debe ingresar
+    label_entrada1 = tk.Label(window, text='Ingrese primer número:', font=('Arial bold', 10))
+    label_entrada1.grid(column=0, row=1)
+
+    label_entrada2 = tk.Label(window, text='Ingrese segundo número:', font=('Arial bold', 10))
+    label_entrada2.grid(column=0, row=3)
+
+    #Crear una etiqueta para el seleccionador(combobox)
+    label_operador = tk.Label(window, text='escoja un operador', font=('Arial bold', 10))
+    label_operador.grid(column=0, row=4)
+
+    #Crear un seleccionador(combobox)
+    combo_operadores=ttk.Combobox(window)
+    #Asignar los valores del seleccionador a traves de su atributo values
+    combo_operadores['values']=['+','-','*','/','pow']
+    #Asignar por defecto una operacion seleccionada:0 es el indice de los valores
+    combo_operadores.current(0) #set the selected item
+    #Ubica el seleccionador
+    combo_operadores.grid(column=1,row=4)
+
+    #Agregar etiqueta para mostrar el resultado de la operacion en pantalla
+    label_resultado=tk.Label(window, text='Resultado', font=('Arial bold',15))
+    label_resultado.grid(column=0,row=5)
+
+
+    def calculadora(num1,num2,operador):
+
+        if operador=='+':
+            resultado=num1+num2
+        elif operador=='-':
+            resultado=num1-num2
+        elif operador=='*':
+            resultado=num1*num2
+        elif operador=='/':
+            resultado=round(num1/num2,2)
+        else:
+            resultado=num1**num2
+
+        return resultado
+
+    def click_calcular (label, num1, num2,operador):
+
+        #Conversion de valores
+        valor1=float(num1)
+        valor2=float(num2)
+
+        #Calculo dados los valores y el operador
+        res=calculadora(valor1, valor2, operador)
+
+        #Actualizacion del texto en la etiqueta
+        label.configure(text='Resultado: '+str(res))
+
+
+    #Boton calcular
+    boton= tk.Button(window,
+                     command=lambda: click_calcular(
+                         label_resultado,
+                         entrada1.get(),
+                         entrada2.get(),
+                         combo_operadores.get()),
+                     text='Calcular',
+                     bg='purple',
+                     fg='white')
+
+    boton.grid(column=1, row=5)
+
+
+    window.mainloop()
+
+def main():
+    init_window()
+
+
+main()
