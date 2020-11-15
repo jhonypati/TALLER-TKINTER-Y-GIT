@@ -11,5 +11,5 @@ Ejecutar los siguientes comandos para instalar las librerias:
 *from tkinter import ttk
 *import tkinter as tk
 
-widgets adicionales: 
+
 
